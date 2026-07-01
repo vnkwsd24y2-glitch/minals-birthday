@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday, Minal 🌸</title>
+<meta name="description" content="A birthday surprise for Minal, made with love by Ibrahim.">
+
+<!-- Fonts: elegant display serif, clean body sans, cursive signature -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================= -->
+<!-- LOADING SCREEN                -->
+<!-- ============================= -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-petals"></div>
+  <div class="loader-content">
+    <div class="loader-blossom">
+      <svg viewBox="0 0 100 100" width="46" height="46">
+        <g class="blossom-petals">
+          <ellipse cx="50" cy="28" rx="12" ry="20" />
+          <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(72 50 50)"/>
+          <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(144 50 50)"/>
+          <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(216 50 50)"/>
+          <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(288 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="6" class="blossom-center"/>
+      </svg>
+    </div>
+    <p class="loader-text" id="loaderText">Made just for someone special&hellip;</p>
+    <div class="loader-bar"><span></span></div>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- INTRO / HERO OVERLAY          -->
+<!-- ============================= -->
+<section id="intro" aria-hidden="true">
+  <div class="intro-petals"></div>
+  <div class="intro-glow"></div>
+
+  <div class="glass-card intro-card">
+    <p class="eyebrow">A little something for</p>
+    <h1 class="intro-title">
+      Happy Birthday
+      <span class="intro-name">Minal</span>
+    </h1>
+    <p class="intro-date">2 July 2026</p>
+
+    <button id="openSurpriseBtn" class="surprise-btn" type="button">
+      <span class="btn-shine"></span>
+      <span class="btn-label">Open Your Surprise <span class="btn-flower">🌸</span></span>
+    </button>
+  </div>
+</section>
+
+<!-- ============================= -->
+<!-- AMBIENT LAYERS (post-open)    -->
+<!-- ============================= -->
+<div id="petals-container" aria-hidden="true"></div>
+<div id="sparkles-container" aria-hidden="true"></div>
+
+<!-- floating audio controls, appear once music starts -->
+<button id="muteToggle" class="mute-btn" type="button" aria-label="Toggle music">
+  <svg id="iconSound" viewBox="0 0 24 24" width="18" height="18"><path d="M3 10v4h4l5 5V5L7 10H3z"/><path d="M16.5 12a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12z"/></svg>
+  <svg id="iconMute" viewBox="0 0 24 24" width="18" height="18" style="display:none"><path d="M3 10v4h4l5 5V5L7 10H3z"/><line x1="16" y1="9" x2="21" y2="14" stroke="currentColor" stroke-width="1.6"/><line x1="21" y1="9" x2="16" y2="14" stroke="currentColor" stroke-width="1.6"/></svg>
+</button>
+
+<audio id="bgMusic" loop preload="none">
+  <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============================= -->
+<!-- MAIN EXPERIENCE               -->
+<!-- ============================= -->
+<main id="main-content">
+
+  <!-- Opening line -->
+  <section class="sentence-section reveal">
+    <p class="sentence">For every version of you<br><span>this year gets to meet.</span></p>
+  </section>
+
+  <!-- Photo 1 -->
+  <section class="photo-section reveal" data-index="01">
+    <div class="photo-frame">
+      <img src="photos/1.jpg" alt="Minal — memory one" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Some smiles make<br><span>ordinary days unforgettable.</span></p>
+  </section>
+
+  <!-- Photo 2 -->
+  <section class="photo-section reveal" data-index="02">
+    <div class="photo-frame">
+      <img src="photos/2.jpg" alt="Minal — memory two" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">The little moments<br><span>are often the biggest memories.</span></p>
+  </section>
+
+  <!-- Photo 3 -->
+  <section class="photo-section reveal" data-index="03">
+    <div class="photo-frame">
+      <img src="photos/3.jpg" alt="Minal — memory three" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Some people make life feel lighter<br><span>just by being themselves.</span></p>
+  </section>
+
+  <!-- Photo 4 -->
+  <section class="photo-section reveal" data-index="04">
+    <div class="photo-frame">
+      <img src="photos/4.jpg" alt="Minal — memory four" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">A quiet laugh, caught mid-frame —<br><span>still worth keeping forever.</span></p>
+  </section>
+
+  <!-- Photo 5 -->
+  <section class="photo-section reveal" data-index="05">
+    <div class="photo-frame">
+      <img src="photos/5.jpg" alt="Minal — memory five" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Not every day is special.<br><span>These ones just were.</span></p>
+  </section>
+
+  <!-- Photo 6 -->
+  <section class="photo-section reveal" data-index="06">
+    <div class="photo-frame">
+      <img src="photos/6.jpg" alt="Minal — memory six" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Some faces you don't just see.<br><span>You remember them.</span></p>
+  </section>
+
+  <!-- Photo 7 -->
+  <section class="photo-section reveal" data-index="07">
+    <div class="photo-frame">
+      <img src="photos/7.jpg" alt="Minal — memory seven" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Kindness photographs well —<br><span>it always has, on you.</span></p>
+  </section>
+
+  <!-- Photo 8 -->
+  <section class="photo-section reveal" data-index="08">
+    <div class="photo-frame">
+      <img src="photos/8.jpg" alt="Minal — memory eight" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Some warmth doesn't need words.<br><span>It just needs you in the room.</span></p>
+  </section>
+
+  <!-- Photo 9 -->
+  <section class="photo-section reveal" data-index="09">
+    <div class="photo-frame">
+      <img src="photos/9.jpg" alt="Minal — memory nine" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">A good heart has a way<br><span>of showing on a good day.</span></p>
+  </section>
+
+  <!-- Photo 10 -->
+  <section class="photo-section reveal" data-index="10">
+    <div class="photo-frame">
+      <img src="photos/10.jpg" alt="Minal — memory ten" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">Time moves quietly.<br><span>Good memories don't.</span></p>
+  </section>
+
+  <!-- Photo 11 -->
+  <section class="photo-section reveal" data-index="11">
+    <div class="photo-frame">
+      <img src="photos/11.jpg" alt="Minal — memory eleven" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <section class="sentence-section reveal">
+    <p class="sentence">And through all of it,<br><span>this same smile stayed.</span></p>
+  </section>
+
+  <!-- Photo 12 -->
+  <section class="photo-section reveal" data-index="12">
+    <div class="photo-frame">
+      <img src="photos/12.jpg" alt="Minal — memory twelve" loading="lazy">
+      <div class="photo-vignette"></div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- BIRTHDAY LETTER                -->
+  <!-- ============================= -->
+  <section class="letter-section reveal">
+    <div class="glass-card letter-card">
+      <p class="letter-eyebrow">A letter, just for you</p>
+      <div class="letter-body">
+        <p>Minal,</p>
+        <p>
+          Another year has found you — a little wiser, a little softer,
+          still entirely yourself. I hope this one holds more laughter than
+          worry, more peace than noise, and days that feel as light as you
+          make other people's feel.
+        </p>
+        <p>
+          May Allah keep you safe, ease every hard road before you reach it,
+          and fill your life with people who deserve your kindness.
+          May you find success that doesn't cost you your peace, and
+          memories worth returning to, again and again.
+        </p>
+        <p>
+          Whatever today brings, I hope it reminds you how loved you are.
+        </p>
+        <p class="letter-sign">Happy Birthday, Khambay. 🌸</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- ENDING                         -->
+  <!-- ============================= -->
+  <section class="ending-section reveal" id="endingSection">
+    <div class="heart-container" id="heartContainer" aria-hidden="true"></div>
+    <div class="ending-content">
+      <p class="ending-eyebrow">Happy Birthday</p>
+      <h2 class="ending-name">Minal</h2>
+      <p class="ending-blessing">May Allah bless every step of your journey.</p>
+      <p class="ending-credit">Made with love by <span>Ibrahim</span></p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================= -->
+<!-- SECRET FLOWER (hidden trigger) -->
+<!-- ============================= -->
+<button id="secretFlower" class="secret-flower" type="button" aria-label="A tiny secret">
+  <span class="secret-glow"></span>
+  <svg viewBox="0 0 100 100" width="22" height="22">
+    <g class="blossom-petals">
+      <ellipse cx="50" cy="28" rx="12" ry="20"/>
+      <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(72 50 50)"/>
+      <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(144 50 50)"/>
+      <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(216 50 50)"/>
+      <ellipse cx="50" cy="28" rx="12" ry="20" transform="rotate(288 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="6" class="blossom-center"/>
+  </svg>
+</button>
+
+<!-- ============================= -->
+<!-- SECRET LETTER OVERLAY          -->
+<!-- ============================= -->
+<div id="secretOverlay" class="secret-overlay" aria-hidden="true">
+  <button id="closeSecret" class="secret-close" type="button" aria-label="Close">&times;</button>
+  <div class="folded-paper" id="foldedPaper">
+    <div class="paper-inner">
+      <p class="secret-eyebrow">A message, sealed with honesty</p>
+      <div class="secret-text">
+        <p>Minal,</p>
+        <p>
+          I won't ask you anything today. Today isn't mine — it's yours,
+          and it should stay light, and full, and easy.
+        </p>
+        <p>
+          I just wanted you to know: if Allah has already written our paths
+          to meet somewhere further down the road, I hope to spend my life
+          being someone who protects your smile — quietly, patiently,
+          without ever needing you to owe me anything for it.
+        </p>
+        <p>
+          Until then, or instead — no pressure, no expectations. Just this:
+          I hope your year is as good to you as you are to everyone in it.
+        </p>
+      </div>
+      <p class="secret-signature" id="secretSignature">— Ibrahim ❤️</p>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

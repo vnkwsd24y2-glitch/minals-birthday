@@ -1,0 +1,604 @@
+/* =====================================================
+   MINAL'S BIRTHDAY — STYLE SHEET
+   Design tokens: soft blush pink + rose gold on white,
+   glassmorphism, Apple-quality easing, cherry blossoms.
+   ===================================================== */
+
+:root{
+  /* ---- Color tokens ---- */
+  --white:            #ffffff;
+  --cream:             #fffaf9;
+  --blush-50:          #fff3f5;
+  --blush-100:         #ffe3e9;
+  --blush-200:         #f9c9d4;
+  --rose-gold-300:     #e6b3ba;
+  --rose-gold-400:     #d79ba5;
+  --rose-gold-500:     #c08497;
+  --rose-gold-600:     #a9707f;
+  --plum-text:         #4a3b40;
+  --plum-soft:         #7c6a6f;
+  --gold-accent:       #cda36a;
+  --gold-soft:         #e7cfa4;
+
+  /* ---- Type ---- */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+
+  /* ---- Motion ---- */
+  --ease-apple: cubic-bezier(.22,1,.36,1);
+  --ease-soft: cubic-bezier(.16,.84,.44,1);
+
+  color-scheme: light;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--plum-text);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+img{ display:block; max-width:100%; }
+button{ font-family:inherit; border:none; background:none; cursor:pointer; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+}
+
+/* =====================================================
+   GLASS CARD (shared component)
+   ===================================================== */
+.glass-card{
+  position:relative;
+  background: linear-gradient(160deg, rgba(255,255,255,.65), rgba(255,255,255,.35));
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.6);
+  border-radius: 28px;
+  box-shadow:
+    0 8px 32px rgba(192,132,151,.18),
+    0 1px 0 rgba(255,255,255,.8) inset;
+}
+
+/* =====================================================
+   LOADING SCREEN
+   ===================================================== */
+#loader{
+  position:fixed; inset:0; z-index:100;
+  background: var(--white);
+  display:flex; align-items:center; justify-content:center;
+  transition: opacity 1s var(--ease-apple), visibility 1s;
+}
+#loader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+
+.loader-petals{ position:absolute; inset:0; overflow:hidden; }
+
+.loader-content{
+  position:relative; z-index:2;
+  display:flex; flex-direction:column; align-items:center;
+  gap:18px;
+}
+
+.loader-blossom svg{ animation: blossomSpin 6s linear infinite; }
+.blossom-petals ellipse{ fill: var(--rose-gold-300); opacity:.85; }
+.blossom-center{ fill: var(--gold-accent); }
+
+@keyframes blossomSpin{
+  0%{ transform:rotate(0deg) scale(1); }
+  50%{ transform:rotate(180deg) scale(1.08); }
+  100%{ transform:rotate(360deg) scale(1); }
+}
+
+.loader-text{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing:.02em;
+  color: var(--plum-soft);
+  min-height: 20px;
+  text-align:center;
+  transition: opacity .5s var(--ease-soft);
+}
+
+.loader-bar{
+  width:130px; height:2px; border-radius:2px;
+  background: var(--blush-100);
+  overflow:hidden;
+}
+.loader-bar span{
+  display:block; height:100%; width:40%;
+  background: linear-gradient(90deg, var(--rose-gold-400), var(--gold-accent));
+  animation: loaderSweep 1.6s ease-in-out infinite;
+}
+@keyframes loaderSweep{
+  0%{ transform:translateX(-120%); }
+  100%{ transform:translateX(340%); }
+}
+
+/* =====================================================
+   INTRO / HERO
+   ===================================================== */
+#intro{
+  position:fixed; inset:0; z-index:90;
+  display:flex; align-items:center; justify-content:center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 30% 15%, var(--blush-50), transparent 55%),
+    radial-gradient(circle at 80% 85%, var(--blush-100), transparent 50%),
+    var(--white);
+  opacity:0; visibility:hidden;
+  transition: opacity 1.1s var(--ease-apple), visibility 1.1s;
+}
+#intro.show{ opacity:1; visibility:visible; }
+#intro.fade-out{ opacity:0; visibility:hidden; pointer-events:none; }
+
+.intro-petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+
+.intro-glow{
+  position:absolute; width:70vw; height:70vw; max-width:520px; max-height:520px;
+  left:50%; top:42%; transform:translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(230,179,186,.35), transparent 70%);
+  filter: blur(10px);
+  animation: glowPulse 6s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes glowPulse{
+  0%,100%{ opacity:.6; transform:translate(-50%,-50%) scale(1); }
+  50%{ opacity:1; transform:translate(-50%,-50%) scale(1.06); }
+}
+
+.intro-card{
+  position:relative; z-index:3;
+  padding: 46px 30px 38px;
+  width:100%; max-width: 360px;
+  text-align:center;
+  animation: cardRise 1.2s var(--ease-apple) both;
+  animation-delay:.15s;
+}
+@keyframes cardRise{
+  from{ opacity:0; transform: translateY(28px) scale(.97); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+.eyebrow{
+  font-size: 11.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color: var(--rose-gold-600);
+  font-weight:500;
+  margin-bottom: 14px;
+}
+
+.intro-title{
+  font-family: var(--font-display);
+  font-weight:600;
+  font-size: 30px;
+  line-height:1.25;
+  color: var(--plum-text);
+}
+.intro-name{
+  display:block;
+  font-size: 54px;
+  font-style: italic;
+  font-weight:600;
+  margin-top: 4px;
+  background: linear-gradient(120deg, var(--rose-gold-600), var(--gold-accent) 55%, var(--rose-gold-500));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.intro-date{
+  margin-top: 14px;
+  font-size: 13.5px;
+  letter-spacing:.08em;
+  color: var(--plum-soft);
+}
+
+.surprise-btn{
+  position:relative;
+  margin-top: 32px;
+  padding: 16px 30px;
+  border-radius: 999px;
+  overflow:hidden;
+  background: linear-gradient(135deg, var(--rose-gold-400), var(--rose-gold-600));
+  box-shadow: 0 10px 26px rgba(169,112,127,.38), 0 2px 0 rgba(255,255,255,.4) inset;
+  transition: transform .35s var(--ease-apple), box-shadow .35s var(--ease-apple);
+  animation: btnBreathe 3.2s ease-in-out infinite;
+}
+.surprise-btn:active{ transform: scale(.96); }
+@keyframes btnBreathe{
+  0%,100%{ box-shadow: 0 10px 26px rgba(169,112,127,.38), 0 2px 0 rgba(255,255,255,.4) inset; }
+  50%{ box-shadow: 0 14px 34px rgba(169,112,127,.5), 0 2px 0 rgba(255,255,255,.4) inset; }
+}
+
+.btn-label{
+  position:relative; z-index:2;
+  color:#fff; font-size:14.5px; font-weight:500; letter-spacing:.03em;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-flower{ display:inline-block; animation: flowerSway 2.6s ease-in-out infinite; }
+@keyframes flowerSway{
+  0%,100%{ transform: rotate(-8deg); }
+  50%{ transform: rotate(8deg); }
+}
+
+.btn-shine{
+  position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-20deg);
+  animation: shineSweep 3.4s ease-in-out infinite;
+}
+@keyframes shineSweep{
+  0%{ left:-60%; }
+  45%,100%{ left:130%; }
+}
+
+/* =====================================================
+   AMBIENT: PETALS + SPARKLES
+   ===================================================== */
+#petals-container, #sparkles-container{
+  position:fixed; inset:0; z-index:5;
+  pointer-events:none; overflow:hidden;
+}
+
+.petal{
+  position:absolute; top:-40px;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, var(--blush-200), var(--rose-gold-300));
+  opacity:.85;
+  will-change: transform;
+  animation-name: petalFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes petalFall{
+  0%{ transform: translate3d(0,-5vh,0) rotate(0deg); }
+  100%{ transform: translate3d(var(--drift,40px), 110vh, 0) rotate(var(--spin,360deg)); }
+}
+
+.sparkle{
+  position:absolute;
+  width: 4px; height:4px; border-radius:50%;
+  background: var(--gold-soft);
+  box-shadow: 0 0 8px 2px rgba(231,207,164,.7);
+  animation: sparkleTwinkle 3.2s ease-in-out infinite;
+}
+@keyframes sparkleTwinkle{
+  0%,100%{ opacity:0; transform: scale(.4); }
+  50%{ opacity:.9; transform: scale(1); }
+}
+
+/* Loader / intro petals are smaller & slower */
+.loader-petals .petal, .intro-petals .petal{ opacity:.55; }
+
+/* =====================================================
+   MUTE TOGGLE
+   ===================================================== */
+.mute-btn{
+  position:fixed; top: max(18px, env(safe-area-inset-top)); right:18px; z-index:60;
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--rose-gold-600);
+  background: rgba(255,255,255,.55);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 4px 16px rgba(192,132,151,.2);
+  opacity:0; transform: translateY(-10px);
+  transition: opacity .5s var(--ease-soft), transform .5s var(--ease-soft);
+}
+.mute-btn.show{ opacity:1; transform:translateY(0); }
+
+/* =====================================================
+   MAIN CONTENT
+   ===================================================== */
+#main-content{
+  position:relative; z-index:2;
+  opacity:0;
+  transition: opacity 1.2s var(--ease-apple);
+}
+#main-content.reveal-main{ opacity:1; }
+
+body.secret-open #main-content{
+  filter: blur(14px) brightness(.85) saturate(.9);
+  transition: filter .8s var(--ease-apple);
+}
+
+/* ---- Sentence sections ---- */
+.sentence-section{
+  min-height: 62vh;
+  display:flex; align-items:center; justify-content:center;
+  padding: 40px 32px;
+  text-align:center;
+}
+.sentence{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight:500;
+  font-size: 22px;
+  line-height:1.55;
+  color: var(--plum-text);
+  max-width: 320px;
+}
+.sentence span{ color: var(--rose-gold-500); }
+
+/* ---- Reveal-on-scroll base state ---- */
+.reveal{
+  opacity:0;
+  transform: translateY(36px);
+  transition: opacity 1.1s var(--ease-apple), transform 1.1s var(--ease-apple);
+}
+.reveal.in-view{ opacity:1; transform: translateY(0); }
+
+/* ---- Photo sections ---- */
+.photo-section{
+  position:relative;
+  height: 92vh;
+  height: 92svh;
+  margin: 6vh auto;
+  max-width: 430px;
+  padding: 0 16px;
+}
+.photo-frame{
+  position:relative;
+  width:100%; height:100%;
+  border-radius: 26px;
+  overflow:hidden;
+  box-shadow: 0 20px 46px rgba(120,80,90,.22);
+  background: var(--blush-100);
+}
+.photo-frame img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  transform: scale(1.12);
+  transition: transform 9s var(--ease-soft), filter 1.4s ease;
+  filter: saturate(.94) brightness(.98);
+}
+.photo-section.in-view .photo-frame img{
+  transform: scale(1.0);
+}
+/* continued slow Ken Burns drift while in view */
+.photo-section.in-view .photo-frame img{
+  animation: kenBurns 16s ease-in-out infinite alternate;
+}
+@keyframes kenBurns{
+  0%{ transform: scale(1.02) translate(0,0); }
+  100%{ transform: scale(1.13) translate(-1.5%, -1.5%); }
+}
+
+.photo-vignette{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(74,59,64,.38) 100%);
+  pointer-events:none;
+}
+
+/* photo index label removed from HTML default view but reserved via data-index for future use */
+
+/* =====================================================
+   LETTER SECTION
+   ===================================================== */
+.letter-section{
+  display:flex; align-items:center; justify-content:center;
+  padding: 90px 22px;
+}
+.letter-card{
+  max-width: 380px;
+  width:100%;
+  padding: 42px 28px 36px;
+}
+.letter-eyebrow{
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color: var(--rose-gold-600); text-align:center; margin-bottom:22px;
+  font-weight:500;
+}
+.letter-body p{
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height:1.85;
+  color: var(--plum-text);
+  margin-bottom: 16px;
+}
+.letter-body p:first-child{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--rose-gold-600);
+}
+.letter-sign{
+  margin-top: 20px;
+  font-family: var(--font-script);
+  font-size: 24px;
+  color: var(--rose-gold-500);
+  text-align:right;
+}
+
+/* =====================================================
+   ENDING
+   ===================================================== */
+.ending-section{
+  position:relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  padding: 60px 24px;
+  background: radial-gradient(circle at 50% 30%, var(--blush-50), var(--cream) 70%);
+}
+.ending-section.warm{
+  background: radial-gradient(circle at 50% 30%, var(--blush-100), #fff2ee 75%);
+}
+
+.heart-container{
+  position:absolute; inset:0;
+  pointer-events:none;
+}
+.heart-petal{
+  position:absolute;
+  width:9px; height:9px;
+  border-radius: 100% 0 100% 0;
+  background: linear-gradient(135deg, var(--rose-gold-300), var(--rose-gold-500));
+  opacity:0;
+  transform: translate(-50%,-50%) scale(.3);
+  transition: opacity 1.1s var(--ease-apple), transform 1.1s var(--ease-apple);
+}
+.heart-petal.show{
+  opacity:.9;
+  transform: translate(-50%,-50%) scale(1);
+  animation: heartPulse 2.6s ease-in-out infinite;
+}
+@keyframes heartPulse{
+  0%,100%{ transform: translate(-50%,-50%) scale(1); }
+  50%{ transform: translate(-50%,-50%) scale(1.18); }
+}
+
+.ending-content{ position:relative; z-index:2; text-align:center; }
+.ending-eyebrow{
+  font-size:12px; letter-spacing:.24em; text-transform:uppercase;
+  color: var(--rose-gold-600); margin-bottom:6px; font-weight:500;
+}
+.ending-name{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight:600;
+  font-size: 46px;
+  background: linear-gradient(120deg, var(--rose-gold-600), var(--gold-accent) 55%, var(--rose-gold-500));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.ending-blessing{
+  margin-top: 18px;
+  font-size: 14.5px;
+  color: var(--plum-text);
+  max-width: 280px;
+  margin-left:auto; margin-right:auto;
+  line-height:1.7;
+}
+.ending-credit{
+  margin-top: 30px;
+  font-size: 12px;
+  letter-spacing:.05em;
+  color: var(--plum-soft);
+}
+.ending-credit span{ color: var(--rose-gold-500); font-weight:600; }
+
+/* =====================================================
+   SECRET FLOWER
+   ===================================================== */
+.secret-flower{
+  position:fixed; right:16px; bottom: max(16px, env(safe-area-inset-bottom));
+  z-index:55;
+  width:34px; height:34px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%;
+  opacity:0; pointer-events:none;
+  transform: scale(.7);
+  transition: opacity 1.4s var(--ease-soft), transform 1.4s var(--ease-soft);
+}
+.secret-flower.show{ opacity:.55; pointer-events:auto; transform:scale(1); }
+.secret-flower:active{ transform: scale(.85); }
+.secret-flower svg .blossom-petals ellipse{ fill: var(--rose-gold-400); }
+.secret-flower svg .blossom-center{ fill: var(--gold-accent); }
+
+.secret-glow{
+  position:absolute; inset:-6px; border-radius:50%;
+  background: radial-gradient(circle, rgba(212,165,165,.55), transparent 70%);
+  animation: secretPulse 2.8s ease-in-out infinite;
+}
+@keyframes secretPulse{
+  0%,100%{ opacity:.4; transform: scale(.9); }
+  50%{ opacity:.9; transform: scale(1.25); }
+}
+
+/* =====================================================
+   SECRET OVERLAY + FOLDED LETTER
+   ===================================================== */
+.secret-overlay{
+  position:fixed; inset:0; z-index:80;
+  display:flex; align-items:center; justify-content:center;
+  padding: 26px;
+  background: rgba(255,246,247,.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity:0; visibility:hidden;
+  transition: opacity .7s var(--ease-apple), visibility .7s;
+}
+.secret-overlay.open{ opacity:1; visibility:visible; }
+
+.secret-close{
+  position:absolute; top: max(20px, env(safe-area-inset-top)); right:20px;
+  width:36px; height:36px; border-radius:50%;
+  font-size:22px; line-height:1; color: var(--rose-gold-600);
+  background: rgba(255,255,255,.6);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border:1px solid rgba(255,255,255,.7);
+}
+
+.folded-paper{
+  width:100%; max-width: 360px;
+  transform: scaleY(.06);
+  transform-origin: top center;
+  transition: transform 1.1s var(--ease-apple);
+}
+.secret-overlay.open .folded-paper{ transform: scaleY(1); }
+
+.paper-inner{
+  background: linear-gradient(165deg, rgba(255,255,255,.92), rgba(255,247,248,.88));
+  border: 1px solid rgba(255,255,255,.8);
+  border-radius: 20px;
+  padding: 34px 26px 30px;
+  box-shadow: 0 24px 60px rgba(120,80,90,.28);
+  opacity:0;
+  transition: opacity .6s var(--ease-soft) .5s;
+}
+.secret-overlay.open .paper-inner{ opacity:1; }
+
+.secret-eyebrow{
+  font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+  color: var(--rose-gold-600); text-align:center; margin-bottom:20px; font-weight:500;
+}
+.secret-text p{
+  font-size: 14.5px; line-height:1.85; color: var(--plum-text);
+  margin-bottom:14px;
+}
+.secret-text p:first-child{
+  font-family: var(--font-display); font-style:italic; font-size:18px;
+  color: var(--rose-gold-600);
+}
+
+.secret-signature{
+  margin-top: 18px;
+  text-align:right;
+  font-family: var(--font-script);
+  font-size: 30px;
+  color: var(--rose-gold-600);
+  white-space:nowrap;
+  overflow:hidden;
+  max-width: 0;
+  transition: max-width 1.6s var(--ease-apple) 1.3s;
+}
+.secret-overlay.open .secret-signature{ max-width: 220px; }
+
+/* =====================================================
+   RESPONSIVE — tuned primarily for iPhone 13 (390x844)
+   safe-area padding for notch / home indicator
+   ===================================================== */
+@supports (padding: max(0px)){
+  #intro, .ending-section{ padding-top: max(24px, env(safe-area-inset-top)); }
+}
+
+@media (min-width:480px){
+  .intro-card{ max-width: 400px; }
+  .photo-section{ max-width: 460px; }
+}
+
+@media (max-height: 700px){
+  .photo-section{ height: 86vh; }
+  .sentence-section{ min-height: 50vh; }
+}

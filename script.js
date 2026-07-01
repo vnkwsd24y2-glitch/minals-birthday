@@ -53,7 +53,7 @@
     'IMG_0465.jpeg',
     'IMG_0466.jpeg',
     'IMG_0467.jpeg',
-    'IMG_0468.JPG',
+    'IMG_0468.jpeg',
     'IMG_0469.jpeg',
     'IMG_0470.jpeg',
     'IMG_0471.jpeg'

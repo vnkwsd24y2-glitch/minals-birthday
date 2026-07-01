@@ -56,7 +56,7 @@
     'IMG_0468.jpeg',
     'IMG_0469.jpeg',
     'IMG_0470.jpeg',
-    'IMG_0471.jpeg'
+    'IMG_0495.jpeg'
   ];
 
   function loadPhotos() {
